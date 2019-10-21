@@ -554,6 +554,10 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
      * Wait until a proper shutdown command is received, then return.
      * This keeps the main thread alive - the thread pool listening for http
      * connections is daemon threads.
+     *
+     * Catalina中监听SHUTDOWN端口8005，等待发送过来的SHUTDOWN命令。
+     *
+     * 主线程阻塞在这里。
      */
     @Override
     public void await() {

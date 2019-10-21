@@ -130,6 +130,8 @@ public final class Bootstrap {
 
     /**
      * Daemon reference.
+     *
+     * catalinaDaemon为org.apache.catalina.startup.Catalina
      */
     private Object catalinaDaemon = null;
 
@@ -274,6 +276,7 @@ public final class Bootstrap {
             startupInstance.getClass().getMethod(methodName, paramTypes);
         method.invoke(startupInstance, paramValues);
 
+        // 这里catalinaDaemon为org.apache.catalina.startup.Catalina
         catalinaDaemon = startupInstance;
     }
 
@@ -347,6 +350,9 @@ public final class Bootstrap {
 
     /**
      * Stop the Catalina Daemon.
+     *
+     * 停止Catalina Daemon。
+     *
      * @throws Exception Fatal stop error
      */
     public void stop() throws Exception {
@@ -369,6 +375,11 @@ public final class Bootstrap {
 
    /**
      * Stop the standalone server.
+     *
+     * 停止一个单独的server。
+     * 通过向shutdown port端口发送SHUTDOWN指令。
+     * 来关闭正在监听这个shudown port的server实例。
+     *
      * @param arguments Command line arguments
      * @throws Exception Fatal stop error
      */
@@ -477,6 +488,7 @@ public final class Bootstrap {
                     System.exit(1);
                 }
             } else if (command.equals("stop")) {
+                // 如果是stop命令，则向监听shutdown port的server发送shutdown命令，来关闭对应的server。
                 daemon.stopServer(args);
             } else if (command.equals("configtest")) {
                 daemon.load(args);

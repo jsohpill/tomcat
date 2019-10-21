@@ -663,6 +663,7 @@ public class Catalina {
             }
         }
 
+        // 在这个方法中监听8005端口，主线程阻塞在这里，等待SHUTDOWN命令的到来。
         if (await) {
             await();
             stop();
@@ -672,6 +673,8 @@ public class Catalina {
 
     /**
      * Stop an existing server instance.
+     *
+     * 停止一个已经存在的服务实例。
      */
     public void stop() {
 
