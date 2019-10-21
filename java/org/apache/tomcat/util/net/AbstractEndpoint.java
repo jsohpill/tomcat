@@ -914,6 +914,7 @@ public abstract class AbstractEndpoint<S,U> {
             this.executor = null;
             if (executor instanceof ThreadPoolExecutor) {
                 //this is our internal one, so we need to shut it down
+                // 这是内部线程池，所以要关闭它。
                 ThreadPoolExecutor tpe = (ThreadPoolExecutor) executor;
                 tpe.shutdownNow();
                 long timeout = getExecutorTerminationTimeoutMillis();
