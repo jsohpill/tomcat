@@ -29,8 +29,6 @@ import org.apache.tomcat.util.res.StringManager;
  * executor. If you use a normal queue, the executor will spawn threads when
  * there are idle threads and you wont be able to force items onto the queue
  * itself.
- *
- * 重写了offer方法，改变了ExecutorService的行为。
  */
 public class TaskQueue extends LinkedBlockingQueue<Runnable> {
 

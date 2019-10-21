@@ -295,7 +295,6 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
         if (running) {
             running = false;
             if (poller != null) {
-                // 销毁poller，状态设置为close
                 poller.destroy();
                 poller = null;
             }
@@ -306,8 +305,6 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
             } catch (InterruptedException e) {
                 log.warn(sm.getString("endpoint.nio.stopLatchAwaitInterrupted"), e);
             }
-
-            // 关闭内部的线程池
             shutdownExecutor();
             if (eventCache != null) {
                 eventCache.clear();
